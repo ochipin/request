@@ -18,8 +18,8 @@ func main() {
         Insecure: true,
         // Username: "ID",      // Basic認証が必要な場合は、値を設定
         // Password: "Password" // Basic認証が必要な場合は、値を設定
-        // 送信先URLに対するタイムアウト時間
-        Timeout:  10,
+        // 送信先URLに対するタイムアウト時間(ms単位)
+        Timeout:  1000,
         /* プロキシ設定情報が必要な場合は設定する
         Proxy: request.Proxy{
             URL: "http://proxy.server:8080",
@@ -41,9 +41,11 @@ func main() {
     r.Values().Add("lastname", "ochiai")
 
     // https://localhost/index.html?nickname=ochipin&firstname=suguru&lastname=ochiai を送信
-    res, status, err := r.Get() // r.Post/r.Delete/r.Put/r.Patch が使用可能
+    // r.Post/r.Delete/r.Put/r.Patch が使用可能
+    // r.Submit("CustomMethod") で、リクエストメソッドを指定した以外のものを指定可能 
+    res, status, err := r.Get()
     if err != nil {
-        if status != 0 {
+        if status.StatusCode != 0 {
             // StatusCode Error.
         } else {
             // Error

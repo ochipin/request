@@ -147,7 +147,7 @@ func (r *Request) Send(req *http.Request, transport *http.Transport) ([]byte, *h
 
 	// リクエスト送信用インスタンスを生成
 	client := http.Client{
-		Timeout:   time.Duration(timeout) * time.Second,
+		Timeout:   time.Duration(timeout) * time.Millisecond,
 		Transport: transport,
 	}
 
